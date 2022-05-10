@@ -5,21 +5,7 @@ import {useState} from "react";
 
 
 export default function BookList(props){
-    const [searchTerm, setSearchTerm] = useState("");
-    const [searchResults, setSearchResults] = useState(props.books);
-    const searchHandler = (searchTerm)=> {
-        setSearchTerm(searchTerm);
-        if(searchTerm !== ""){
-            const newBookList = props.books.filter((book) => {
-                return Object.values(book).join("").toLowerCase().includes(searchTerm.toLowerCase())
-            });
-            setSearchResults(newBookList);
-        }
-        else{
-            setSearchResults(props.books);
-        }
-    };
-    const renderBookList= searchResults.map(book => {
+    const renderBookList= props.books.map(book => {
         return(
             <Card 
                 key={book.id}
@@ -29,7 +15,6 @@ export default function BookList(props){
       });
       return(
         <div className="deck"> 
-            <SearchBar term={searchTerm} searchKeyword={searchHandler}/>
             <>{renderBookList}</>
         </div>
       )
